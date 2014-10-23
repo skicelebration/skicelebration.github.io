@@ -519,8 +519,7 @@
                 <!-- CONTACT FORM -->
                 <div class="col-sm-7 col-md-9">
                   <!-- IMPORTANT: change the email address at the top of the assets/php/mail.php file to the email address that you want this form to send to -->
-                  <form class="form-style validate-form clearfix" id="contact-us-form" method="post" action="mailto:info@skiretreats.com" role="form">
-
+                  <form class="form-style validate-form clearfix" id="contact-us-form" method="post" action="http://www.whitewaterexpress.com/util/ski-contact.php" role="form">
                     <!-- form left col -->
                     <div class="col-md-6">
                       <div class="form-group">
@@ -531,8 +530,11 @@
                       </div>
                       <div class="form-group">
                         <input type="tel" class="text-field form-control validate-field phone" data-validation-type="phone" id="form-contact-number" placeholder="Contact Number" name="contact_number">
-                      </div> 
-                                  
+                      </div>          
+                      <div class="form-group text-right">
+                        <img id="form-captcha-img" src="assets/php/form_captcha/captcha_img.php">
+                        <input type="text" class="text-field form-control validate-field required" data-validation-type="captcha" id="form-captcha" placeholder="Enter text" name="captcha">                        
+                      </div>             
                     </div><!-- end: form left col -->
 
                     <!-- form right col -->
@@ -544,7 +546,8 @@
                         <img src="assets/images/theme_images/loader-form.GIF" class="form-loader">
                         <button type="submit" class="btn btn-sm btn-outline-inverse">Submit</button>
                       </div> 
-                      <div class="form-group form-general-error-container"></div>           
+                      <!--<div class="form-group form-general-error-container"></div>-->
+                      <div class="form-group form-general-error"></div>           
                     </div><!-- end: form right col -->
 
                   </form>
@@ -631,31 +634,6 @@
     <script>contact_form_IE9_placeholder_fix();</script>
     <![endif]--> 
 
-    <!--Mailto Form-->
-    <div id="email-template" class="preview">
-      <textarea class="form-control" name="preview" id="content-preview" cols="30" rows="10" readonly></textarea>
-      <a class="btn btn-primary preview-link" href="#">Send as email</a>
-    </div>
-    <script src="assets/js/mailto-master/dist/mailto.min.js"></script>
-    <script>
-      (function(d, Mailto){
-        var form = document.querySelector('#contact-us-form');
-        var previewContainer = document.querySelector('.preview textarea');
-        var previewLink = document.querySelector('.preview .preview-link');
-
-        var m = new Mailto(form);
-        var updatePreview = function updatePreview(event){
-          var body = m.getBody();
-          var data = m.getData();
-
-          previewContainer.value = body;
-          previewLink.href = m.getMailtoUrl('', { subject: 'Greetings from '+ data.name, body: body});
-        };
-
-        form.addEventListener('change', updatePreview);
-        form.addEventListener('submit', updatePreview);
-      })(document, mailto);
-    </script>
     <!--Google Analytics-->
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
