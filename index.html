@@ -385,7 +385,7 @@
                     <div class="content-to-populate-in-modal" id="modal-content-8">
                       <h3>Winterblast 2015</h3> 
                       <img src="assets/images/other_images/winterblast.jpg" alt="Lorem Ipsum">                     
-                      <p><strong>Our Best Ski Retreat EVER!</strong>Come Experience the dynamic teaching of Duffy Robbins and the Awesome music of Consumed By Fire this MLK Weekend at Winterplace.  Look what's all included!</p>
+                      <p><strong>Our Best Ski Retreat EVER!</strong> Come Experience the dynamic teaching of Duffy Robbins and the Awesome music of Consumed By Fire this MLK Weekend at Winterplace.  Look what's all included!</p>
                       <section class="grid row clearfix clearfix-for-2cols">
                         <!-- grid item -->
                         <div class="grid-item col-md-6">
@@ -519,7 +519,7 @@
                 <!-- CONTACT FORM -->
                 <div class="col-sm-7 col-md-9">
                   <!-- IMPORTANT: change the email address at the top of the assets/php/mail.php file to the email address that you want this form to send to -->
-                  <form class="form-style validate-form clearfix" action="assets/php/mail.php" method="POST" role="form">
+                  <form class="form-style validate-form clearfix" id="contact-us-form" method="post" action="mailto:info@skiretreats.com" role="form">
 
                     <!-- form left col -->
                     <div class="col-md-6">
@@ -531,12 +531,8 @@
                       </div>
                       <div class="form-group">
                         <input type="tel" class="text-field form-control validate-field phone" data-validation-type="phone" id="form-contact-number" placeholder="Contact Number" name="contact_number">
-                      </div>  
-                      <div class="form-group text-right">
-                        <img id="form-captcha-img" src="assets/php/form_captcha/captcha_img.php">
-                        <input type="text" class="text-field form-control validate-field required" data-validation-type="captcha" id="form-captcha" placeholder="Enter text" name="captcha">
-                        <span id="form-captcha-refresh" class="fa fa-refresh" title="Reload"></span>
-                      </div>                 
+                      </div> 
+                                  
                     </div><!-- end: form left col -->
 
                     <!-- form right col -->
@@ -635,12 +631,37 @@
     <script>contact_form_IE9_placeholder_fix();</script>
     <![endif]--> 
 
+    <!--Mailto Form-->
+    <div id="email-template" class="preview">
+      <textarea class="form-control" name="preview" id="content-preview" cols="30" rows="10" readonly></textarea>
+      <a class="btn btn-primary preview-link" href="#">Send as email</a>
+    </div>
+    <script src="assets/js/mailto-master/dist/mailto.min.js"></script>
+    <script>
+      (function(d, Mailto){
+        var form = document.querySelector('#contact-us-form');
+        var previewContainer = document.querySelector('.preview textarea');
+        var previewLink = document.querySelector('.preview .preview-link');
+
+        var m = new Mailto(form);
+        var updatePreview = function updatePreview(event){
+          var body = m.getBody();
+          var data = m.getData();
+
+          previewContainer.value = body;
+          previewLink.href = m.getMailtoUrl('', { subject: 'Greetings from '+ data.name, body: body});
+        };
+
+        form.addEventListener('change', updatePreview);
+        form.addEventListener('submit', updatePreview);
+      })(document, mailto);
+    </script>
     <!--Google Analytics-->
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
       ga('create', 'UA-55953952-1', 'auto');
       ga('send', 'pageview');
